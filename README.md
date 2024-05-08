@@ -11,12 +11,6 @@ An open source flashloan smart contract on polygon network
 
 ### 2. Clone This Repo
 
-Run the following command.
-
-```bash
-git clone https://github.com/yuichiroaoki/poly-flash.git
-cd poly-flash
-```
 
 ## Quickstart
 
@@ -61,7 +55,7 @@ yarn compile
 Run the following command.
 
 ```bash
-yarn test test/polygon/dodoflash.test.ts
+yarn test test/balancerflashloan.test.ts
 ```
 
 ## Deploy
@@ -69,25 +63,5 @@ yarn test test/polygon/dodoflash.test.ts
 Once you have successfully done the above quickstart and added your private key to .env file, you can deploy your smart contract with the following command:
 
 ```bash
-yarn deploy --network polygon
-```
-
-It costs about 0.2 MATIC to deploy `Flashloan` contract.
-
-## Example Contract
-
-https://polygonscan.com/address/0xb6c4448386c4ecf4e5eab057351f8a6a8a465a0d
-
-## Liquidations
-
-Deploy on the polygon mainnnet fork with the following command:
-
-```bash
-yarn liquidations
-```
-
-Deploy on the polygon mainnnet with the following command:
-
-```bash
-yarn liquidations --network polygon
+yarn deploy --network <network-name>
 ```
