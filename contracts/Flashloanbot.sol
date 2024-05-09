@@ -7,7 +7,7 @@ import "./IFlashLoanRecipient.sol";
 import "./IBalancerVault.sol";
 import "./IUniswapV2Router02.sol";
 
-contract Flasloanbot is IFlashLoanRecipient, Ownable {
+contract Flashloanbot is IFlashLoanRecipient, Ownable {
 
     address public immutable vault;
     IUniswapV2Router02 private router;
