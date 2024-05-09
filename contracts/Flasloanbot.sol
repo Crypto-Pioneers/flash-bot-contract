@@ -2,15 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IFlashLoanRecipient.sol";
 import "./IBalancerVault.sol";
-import "hardhat/console.sol";
 import "./IUniswapV2Router02.sol";
 
 contract Flasloanbot is IFlashLoanRecipient, Ownable {
-    using SafeMath for uint256;
 
     address public immutable vault;
     IUniswapV2Router02 private router;
@@ -23,14 +20,11 @@ contract Flasloanbot is IFlashLoanRecipient, Ownable {
     function receiveFlashLoan(
         IERC20[] memory tokens,
         uint256[] memory amounts,
-        uint256[] memory feeAmounts,
+        uint256[] memory,
         bytes memory
     ) external override {
         IERC20 token = tokens[0];
         uint256 amount = amounts[0];
-        console.log("borrowed amount:", amount);
-        uint256 feeAmount = feeAmounts[0];
-        console.log("flashloan fee: ", feeAmount);
         uint256[] memory amountOuts1 = _swapTokens(address(tokens[0]), address(tokens[1]), amount);
         _swapTokens(address(tokens[1]), address(tokens[0]), amountOuts1[0]);
         uint currentBal = token.balanceOf(address(this));
