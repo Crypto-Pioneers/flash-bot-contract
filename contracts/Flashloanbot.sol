@@ -21,7 +21,7 @@ contract Flashloanbot is IFlashLoanRecipient, Ownable {
     }
 
     function receiveFlashLoan(
-        IERC20[] memory tokens,
+        IERC20[] memory,
         uint256[] memory amounts,
         uint256[] memory,
         bytes memory
@@ -77,5 +77,16 @@ contract Flashloanbot is IFlashLoanRecipient, Ownable {
             amount, 0, path, address(this), block.timestamp + 3600
         );
         return amountOuts;
+    }
+
+    function withdrawTokens(
+        address[] memory _tokens
+    ) public onlyOwner {
+        for (uint256 i = 0; i < _tokens.length; i++) {
+            address tokenAddress = _tokens[i];
+            IERC20 token = IERC20(tokenAddress);
+            uint256 balance = token.balanceOf(address(this));
+            token.transfer(msg.sender, balance);
+        }
     }
 }
